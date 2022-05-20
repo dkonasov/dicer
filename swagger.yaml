@@ -1,0 +1,37 @@
+openapi: 3.0.0
+info:
+  title: Dicer
+  description: Service for emulating dices throw via dice notation
+  version: "1.0"
+paths:
+  /:
+    get:
+      summary: ""
+      description: throws dice
+      parameters:
+        - in: query
+          name: exp
+          schema:
+            type: string
+          required: true
+          description: number of throws and edges in dice notation
+          example: 2d6
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Dices:
+                    type: array
+                    items:
+                      type: integer
+                    example: [2, 1]
+                  Sum:
+                    type: integer
+                    example: 3
+                  
+        "400":
+          description: exp parameter was not provided, or was provided in invalid format
